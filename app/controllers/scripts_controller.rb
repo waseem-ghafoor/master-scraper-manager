@@ -64,6 +64,6 @@ class ScriptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def script_params
-      params.require(:script).permit(:name, :scheduler)
+      params.require(:script).permit(:name, :scheduler, :input_file)
     end
 end

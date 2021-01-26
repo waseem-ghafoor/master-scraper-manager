@@ -1,10 +1,20 @@
 <p id="notice"><%= notice %></p>
 
+<h1><%= @script.name %> Script Details</h1>
 <p>
-  <strong>Name:</strong>
-  <%= @script.name %>
-  <%= @script.scheduler %>
+  <b>Scheduled at: </b><%= @script.scheduler %>
 </p>
 
-<%= link_to 'Edit', edit_script_path(@script) %> |
-<%= link_to 'Back', scripts_path %>
+<h3>Available links</h3>
+
+<div>
+	<% Dir.glob("#{Rails.root}/public/uploader/script/input_file/offices/*").each do |file_link| %>	<%= link_to file_link.split('/').last, file_link %>
+	<% end %>
+</div>
+
+
+<div>
+	<%= link_to 'Edit', edit_script_path(@script) %> |
+	<%= link_to 'Back', scripts_path %>	
+</div>
+
