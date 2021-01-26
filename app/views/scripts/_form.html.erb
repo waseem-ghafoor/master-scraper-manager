@@ -1,0 +1,25 @@
+<%= form_with(model: script, local: true) do |form| %>
+  <% if script.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(script.errors.count, "error") %> prohibited this script from being saved:</h2>
+
+      <ul>
+        <% script.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+    <br/>
+    <%= form.label :scheduler %>
+    <%= form.datetime_select("scheduler",start_year: 2021, start_month: Time.now.month, start_day: Time.now.day, prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year', hour: "Choose hour", minute: "Choose minute"}) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @script.name %>
+  <%= @script.scheduler %>
+</p>
+
+<%= link_to 'Edit', edit_script_path(@script) %> |
+<%= link_to 'Back', scripts_path %>
