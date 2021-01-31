@@ -5,11 +5,18 @@
   <b>Scheduled at: </b><%= @script.scheduler %>
 </p>
 
-<h3>Available links</h3>
+<h3>Available Output files links</h3>
 
 <div>
-	<% Dir.glob("#{Rails.root}/public/uploader/script/input_file/offices/*").each do |file_link| %>	<%= link_to file_link.split('/').last, file_link %>
+	<% if file_links(@script.name).blank? %>
+		<p>Files not availables</p>
 	<% end %>
+	<p></p>
+	<% file_links(@script.name).each do |file_link| %>	
+		<li>
+			<%= link_to file_name(file_link), download_output_file_path(file_name: send_smart_path(file_link)), download: true %>
+		</li>
+	<% end %> 
 </div>
 
 

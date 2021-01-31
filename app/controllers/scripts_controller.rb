@@ -1,5 +1,6 @@
 class ScriptsController < ApplicationController
   before_action :set_script, only: %i[ show edit update destroy ]
+  include DownloadFile
 
   # GET /scripts or /scripts.json
   def index
@@ -54,6 +55,10 @@ class ScriptsController < ApplicationController
       format.html { redirect_to scripts_url, notice: "Script was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def download_output_file
+    script_output_download params[:file_name]
   end
 
   private
