@@ -23,7 +23,7 @@
 
   <div class="form-group">
     <%= form.label :input_file %>
-    <%= form.file_field :input_file, accept: ".xlsx, .xls, .csv", class: 'form-control-file' %>
+    <%= form.file_field :input_file, :multiple => true, accept: ".xlsx, .xls, .csv, .txt", class: 'form-control-file' %>
   </div>
 
   <div class="actions">

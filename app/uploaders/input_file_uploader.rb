@@ -10,7 +10,7 @@ class InputFileUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "../script_files/#{model.name.underscore}/input_file"
+    "../script_files/#{model.name.underscore}/input_files"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
@@ -36,7 +36,7 @@ class InputFileUploader < CarrierWave::Uploader::Base
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(csv xlx xlsx)
+    %w(csv xlx xlsx txt)
   end
 
   # Override the filename of the uploaded files:

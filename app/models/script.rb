@@ -1,5 +1,5 @@
 class Script < ApplicationRecord
-	mount_uploader :input_file, InputFileUploader
+	mount_uploaders :input_file, InputFileUploader
 	after_create :create_output_directory
 	validates :name, presence: true, uniqueness: true
 
