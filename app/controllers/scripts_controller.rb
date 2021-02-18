@@ -22,8 +22,13 @@ class ScriptsController < ApplicationController
 
   # POST /scripts or /scripts.json
   def create
-    @script = Script.new(script_params)
-
+    
+    date_and_time = '%d-%m-%Y %H:%M:%S %Z'
+    date_time = DateTime.strptime("#{script_params["schedule(3i)"]}-#{script_params["schedule(2i)"]}-#{script_params["schedule(1i)"]} #{script_params["schedule(4i)"]}:#{script_params["schedule(5i)"]}:00 Central Time (US & Canada)",date_and_time)
+    @script = Script.new(name: script_params['name'], schedule: date_time , status: 'Not Set')
+    #@script = Script.new(script_params)
+    #date_time.in_time_zone("Karachi")
+    byebug
     respond_to do |format|
       if @script.save
         format.html { redirect_to @script, notice: "Script was successfully created." }
@@ -69,6 +74,6 @@ class ScriptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def script_params
-      params.require(:script).permit(:name, :scheduler, :input_file)
+      params.require(:script).permit(:name, :schedule, {input_file: []})
     end
 end

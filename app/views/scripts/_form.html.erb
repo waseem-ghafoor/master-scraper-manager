@@ -17,13 +17,13 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :scheduler %>
-    <%= form.datetime_select :scheduler, start_year: 2021, start_month: Time.now.month, start_day: Time.now.day, prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year', hour: "Choose hour", minute: "Choose minute"}, class: 'form-control' %>
+    <%= form.label :schedule %>
+    <%= form.datetime_select :schedule, discard_year: true, start_date: Time.now.day, prompt: {day: 'Choose day', hour: "Choose hour" }, default: Time.now, selected: Date.today, class: 'form-control' %>
   </div>
 
   <div class="form-group">
     <%= form.label :input_file %>
-    <%= form.file_field :input_file, accept: ".xlsx, .xls, .csv", class: 'form-control-file' %>
+    <%= form.file_field :input_file, :multiple => true, accept: ".xlsx, .xls, .csv, .txt", class: 'form-control-file' %>
   </div>
 
   <div class="actions">

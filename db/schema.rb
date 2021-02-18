@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_042644) do
+ActiveRecord::Schema.define(version: 2021_02_17_181650) do
 
   create_table "scripts", force: :cascade do |t|
     t.string "name"
@@ -18,6 +18,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_042644) do
     t.datetime "updated_at", precision: 6, null: false
     t.time "scheduler"
     t.string "input_file"
+    t.string "status"
+    t.datetime "schedule"
   end
 
 end
