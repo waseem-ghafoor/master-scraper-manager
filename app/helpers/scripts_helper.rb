@@ -10,4 +10,7 @@ module ScriptsHelper
 	def file_links(name)
 		Dir.glob("#{Rails.root}/script_files/#{name.underscore}/output_files/*")
 	end
+	def input_file_links(name)
+		Dir.glob("#{Rails.root}/script_files/#{name.underscore}/input_file/*")
+	end
 end

@@ -2,12 +2,25 @@
 
 <h1><%= @script.name %> Script Details</h1>
 <p>
-  <b>Scheduled at: </b><%= @script.schedule %>
+  <b>Scheduled at: </b><%= @script.schedule.present? ? @script.schedule.in_time_zone("Central Time (US & Canada)") : "<b>Not Scheduled</b>".html_safe %>
 </p>
 
-<h3>Available Output files links</h3>
+<h3>Input files</h3>
+<div>
+	<% if input_file_links(@script.name).blank? %>
+		<p>Files not availables</p>
+	<% end %>
+	<% input_file_links(@script.name).each do |file_link| %>
+		<li>
+			<%= file_name(file_link) %>
+		</li>
+	<% end %>
+</div>
+
+<br>
 
 <div>
+	<h3>Available Output files links</h3>
 	<% if file_links(@script.name).blank? %>
 		<p>Files not availables</p>
 	<% end %>

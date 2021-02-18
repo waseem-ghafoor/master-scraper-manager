@@ -13,12 +13,12 @@
 
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control', disabled: action_name == "edit" %>
   </div>
 
   <div class="form-group">
     <%= form.label :schedule %>
-    <%= form.datetime_select :schedule, discard_year: true, start_date: Time.now.day, prompt: {day: 'Choose day', hour: "Choose hour" }, default: Time.now, selected: Date.today, class: 'form-control' %>
+    <%= form.datetime_select :schedule, discard_year: true, start_date: Time.now.day, prompt: {day: 'Choose day', hour: "Choose hour" }, default: Time.now + 10.minutes, selected: Date.today, class: 'form-control' %>
   </div>
 
   <div class="form-group">
