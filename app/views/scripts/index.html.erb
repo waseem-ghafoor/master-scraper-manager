@@ -7,8 +7,7 @@
     <tr>
       <th>Script Name</th>
       <th>Scheduled</th>
-      <th>Created_at</th>
-      <th>Updated_at</th>
+      <th>Status</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -17,9 +16,8 @@
     <% @scripts.each do |script| %>
       <tr>
         <td><%= script.name %></td>
-        <td><%= script.scheduler %></td>
-        <td><%= script.updated_at %></td>
-        <td><%= script.created_at %></td>
+        <td><%= script.schedule %></td>
+        <td><%= script.status %></td>
         <td><%= link_to 'Show', script %></td>
         <td><%= link_to 'Edit', edit_script_path(script) %></td>
         <td><%= link_to 'Destroy', script, method: :delete, data: { confirm: 'Are you sure?' } %></td>
