@@ -4,7 +4,7 @@ class Script < ApplicationRecord
 	validates :name, presence: true, uniqueness: true
 	validate :future_time
 	after_create :create_output_directory
-	after_save :set_script_running_time
+	#after_save :set_script_running_time
 
 
 
@@ -23,12 +23,15 @@ class Script < ApplicationRecord
 	def set_script_running_time
 		p "job running"
 		Delayed::Job.where(script_name: name).delete_all
-		Script.delay(run_at: Time.now + 10.seconds, script_name: name).start_script('') if schedule.present? && schedule > Time.now
+		#byebug
+		update_attribute("status", "Scheduled")
+		Script.delay(run_at: schedule.time, script_name: name).start_script('', self) if schedule.present? && schedule > Time.now
 		p "Job stop"
 	end
 
-	def self.start_script(script_files)
-		sleep 5
-		system("ls #{Rails.root}")
+	def self.start_script(script_file, script)
+		script.update_attribute("status", "Running")
+		system("cd #{Rails.root}/scrapers/#{script.name} && #{script.name}.bat")
+		script.update_attribute("status", "Completed")
 	end
 end

@@ -1,5 +1,5 @@
 class ScriptsController < ApplicationController
-  before_action :set_script, only: %i[ show edit update destroy ]
+  before_action :set_script, only: %i[ show edit update destroy remove_scraper]
   include DownloadFile
 
   # GET /scripts or /scripts.json
@@ -28,6 +28,7 @@ class ScriptsController < ApplicationController
     @script = Script.new(name: script_params['name'], schedule: date_time , status: 'Not Set', input_file: script_params['input_file'])
     respond_to do |format|
       if @script.save
+        @script.set_script_running_time
         format.html { redirect_to @script, notice: "Script was successfully created." }
         format.json { render :show, status: :created, location: @script }
       else
@@ -41,6 +42,7 @@ class ScriptsController < ApplicationController
   def update
     respond_to do |format|
       if @script.update(script_params)
+        @script.set_script_running_time
         format.html { redirect_to @script, notice: "Script was successfully updated." }
         format.json { render :show, status: :ok, location: @script }
       else
@@ -57,6 +59,11 @@ class ScriptsController < ApplicationController
       format.html { redirect_to scripts_url, notice: "Script was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def remove_scraper
+    @script.update_attribute("schedule", nil)
+    Delayed::Job.where(script_name: @script.name)
   end
 
   def download_output_file
