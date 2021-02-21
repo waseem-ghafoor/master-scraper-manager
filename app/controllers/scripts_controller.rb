@@ -38,6 +38,7 @@ class ScriptsController < ApplicationController
   # PATCH/PUT /scripts/1 or /scripts/1.json
   def update
     respond_to do |format|
+      script_params['status'] = 'Scheduled'
       if @script.update(script_params)
         @script.set_script_running_time
         format.html { redirect_to @script, notice: "Script was successfully updated." }
@@ -75,6 +76,6 @@ class ScriptsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def script_params
-      params.require(:script).permit(:name, :schedule, {input_file: []})
+      params.require(:script).permit(:name, :schedule, :status, {input_file: []})
     end
 end
