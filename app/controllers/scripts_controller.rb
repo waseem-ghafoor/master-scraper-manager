@@ -22,10 +22,7 @@ class ScriptsController < ApplicationController
 
   # POST /scripts or /scripts.json
   def create
-    
-    date_and_time = '%d-%m-%Y %H:%M:%S %Z'
-    date_time = DateTime.strptime("#{script_params["schedule(3i)"]}-#{script_params["schedule(2i)"]}-#{script_params["schedule(1i)"]} #{script_params["schedule(4i)"]}:#{script_params["schedule(5i)"]}:00 Central Time (US & Canada)",date_and_time)
-    @script = Script.new(name: script_params['name'], schedule: date_time , status: 'Not Set', input_file: script_params['input_file'])
+    @script = Script.new(script_params)
     respond_to do |format|
       if @script.save
         @script.set_script_running_time
