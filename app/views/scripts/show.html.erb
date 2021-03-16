@@ -5,6 +5,10 @@
   <b>Scheduled at: </b><%= @script.schedule.present? ? @script.schedule.in_time_zone("Central Time (US & Canada)") : "<b>Not Scheduled</b>".html_safe %>
 </p>
 
+<p>
+  <b>Repeat at (Hours): </b> <%= @script.repeat_at %>
+</p>
+
 <h3>Input files</h3>
 <div>
 	<% if input_file_links(@script.name).blank? %>

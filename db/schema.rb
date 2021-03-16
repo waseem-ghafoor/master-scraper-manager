@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_18_180542) do
+ActiveRecord::Schema.define(version: 2021_03_16_192708) do
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2021_02_18_180542) do
     t.string "input_file"
     t.string "status"
     t.datetime "schedule"
+    t.integer "repeat_at"
   end
 
 end
