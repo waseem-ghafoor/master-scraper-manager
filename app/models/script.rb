@@ -31,9 +31,9 @@ class Script < ApplicationRecord
 
 	def self.start_script(script_file, script)
 		script.update_attribute("status", "Running")
-		system("cd #{Rails.root}/scrapers/#{script.name} && #{script.name}.bat")
-		script.update_attribute("status", schedule.repeat_at.present? ? 'Next Scheduled' : 'Completed')
-		script.update_attribute("schedule", script.schedule + script.repeat_at.hours) if schedule.repeat_at.present?
+		system("cd #{Rails.root}/scrapers/#{script.name.underscore} && #{script.name.underscore}.bat")
+		script.update_attribute("status", script.repeat_at.present? ? 'Next Scheduled' : 'Completed')
+		script.update_attribute("schedule", script.schedule + script.repeat_at.hours) if script.repeat_at.present?
 		script.set_script_running_time
 	end
 end
