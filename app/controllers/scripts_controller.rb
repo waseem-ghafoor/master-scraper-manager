@@ -39,6 +39,8 @@ class ScriptsController < ApplicationController
   def update
     respond_to do |format|
       script_params['status'] = 'Scheduled'
+      @script.remove_input_file! if script_params['input_file'].present?
+      
       if @script.update(script_params)
         @script.set_script_running_time
         format.html { redirect_to @script, notice: "Script was successfully updated." }
@@ -52,7 +54,7 @@ class ScriptsController < ApplicationController
 
   # DELETE /scripts/1 or /scripts/1.json
   def destroy
-    @script.destroy
+    @script.try(:destroy)
     respond_to do |format|
       format.html { redirect_to scripts_url, notice: "Script was successfully destroyed." }
       format.json { head :no_content }
